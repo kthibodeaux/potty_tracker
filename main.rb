@@ -7,7 +7,7 @@ MQTT_PORT = 8005
 MQTT_TOPIC = 'potty-tracker'
 
 def log(action)
-  File.open('potty-tracker.log', 'a') do |f|
+  File.open('data/potty-tracker.log', 'a') do |f|
     f.puts "#{Time.now},#{action}"
   end
 end
