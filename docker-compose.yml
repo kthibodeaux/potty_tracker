@@ -13,13 +13,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  potty-tracker:
+  mqtt-client:
     image: ruby:3
     volumes:
       - ruby_bundle:/usr/local/bundle
       - ./:/usr/src/app
     working_dir: /usr/src/app
-    command: bash -c "bundle install && bundle exec ruby main.rb"
+    command: bash -c "bundle install && bundle exec ruby mqtt-client.rb"
 
 volumes:
   ruby_bundle:
