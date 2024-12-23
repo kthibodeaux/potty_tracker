@@ -37,6 +37,20 @@ services:
     depends_on:
       init:
         condition: service_completed_successfully
+  web:
+    image: ruby:3
+    volumes:
+      - ruby_bundle:/usr/local/bundle
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "bundle exec ruby web.rb"
+    ports:
+      - "4567:4567"
+    environment:
+      DATABASE_URL: "postgres://postgres:password@postgres"
+    depends_on:
+      init:
+        condition: service_completed_successfully
 
 volumes:
   ruby_bundle:
