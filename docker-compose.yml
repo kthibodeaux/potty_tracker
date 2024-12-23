@@ -13,13 +13,30 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  init:
+    image: ruby:3
+    volumes:
+      - ruby_bundle:/usr/local/bundle
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "bundle install && bundle exec ruby init.rb"
+    environment:
+      DATABASE_URL: "postgres://postgres:password@postgres"
+    depends_on:
+      postgres:
+        condition: service_healthy
   mqtt-client:
     image: ruby:3
     volumes:
       - ruby_bundle:/usr/local/bundle
       - ./:/usr/src/app
     working_dir: /usr/src/app
-    command: bash -c "bundle install && bundle exec ruby mqtt-client.rb"
+    command: bash -c "bundle exec ruby mqtt-client.rb"
+    environment:
+      DATABASE_URL: "postgres://postgres:password@postgres"
+    depends_on:
+      init:
+        condition: service_completed_successfully
 
 volumes:
   ruby_bundle:
