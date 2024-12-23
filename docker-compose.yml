@@ -34,6 +34,9 @@ services:
     command: bash -c "bundle exec ruby mqtt-client.rb"
     environment:
       DATABASE_URL: "postgres://postgres:password@postgres"
+      MQTT_HOST: "10.1.20.1"
+      MQTT_PORT: 8005
+      MQTT_TOPIC: "potty-tracker"
     depends_on:
       init:
         condition: service_completed_successfully

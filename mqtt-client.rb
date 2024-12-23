@@ -5,9 +5,9 @@ require 'mqtt'
 require 'sequel'
 
 DB = Sequel.connect ENV['DATABASE_URL']
-MQTT_HOST = '10.1.20.1'
-MQTT_PORT = 8005
-MQTT_TOPIC = 'potty-tracker'
+MQTT_HOST = ENV['MQTT_HOST']
+MQTT_PORT = ENV['MQTT_PORT']
+MQTT_TOPIC = ENV['MQTT_TOPIC']
 
 MQTT::Client.connect(MQTT_HOST, MQTT_PORT) do |c|
   c.get(MQTT_TOPIC) do |_, message|
