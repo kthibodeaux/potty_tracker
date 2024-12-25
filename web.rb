@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_support/time'
-require 'json'
 require 'sinatra'
 require 'sequel'
 
@@ -19,10 +18,4 @@ get '/' do
 
   @events = DB[:events].order(:timestamp).where(timestamp: utc_start..utc_end).all
   slim :index
-end
-
-get '/events' do
-  content_type :json
-  events = DB[:events].all
-  events.to_json
 end
