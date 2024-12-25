@@ -8,7 +8,14 @@ head
 body
   main.container
     h1 Potty Tracker
-    = @local_date.strftime('%A, %B %d, %Y')
+    .grid
+      div
+        a href="?date=#{(@local_date - 1.day).strftime('%Y-%m-%d')}"
+          = (@local_date - 1.day).strftime('%A, %B %d, %Y')
+      div= @local_date.strftime('%A, %B %d, %Y')
+      div
+        a href="?date=#{(@local_date + 1.day).strftime('%Y-%m-%d')}"
+          = (@local_date + 1.day).strftime('%A, %B %d, %Y')
     table
       thead
         tr

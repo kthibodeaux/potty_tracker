@@ -10,8 +10,8 @@ TIMEZONE = 'America/New_York'
 set :bind, '0.0.0.0'
 
 def get_utc_range(raw_date)
-  utc_date = raw_date.in_time_zone('UTC')
-  utc_date.beginning_of_day..utc_date.end_of_day
+  date = raw_date.in_time_zone(TIMEZONE)
+  date.beginning_of_day.in_time_zone('UTC')..date.end_of_day.in_time_zone('UTC')
 end
 
 get '/' do
