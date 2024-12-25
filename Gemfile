@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'activesupport'
 gem 'mqtt'
 gem 'pg'
 gem 'puma'

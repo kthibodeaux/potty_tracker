@@ -8,3 +8,16 @@ head
 body
   main.container
     h1 Potty Tracker
+    = @date.strftime('%A, %B %d, %Y')
+    table
+      thead
+        tr
+          th Date
+          th Time
+          th Event
+      tbody
+        - @events.each do |event|
+          tr
+            td= event[:timestamp].in_time_zone(TIMEZONE).strftime('%e %b %Y')
+            td= event[:timestamp].in_time_zone(TIMEZONE).strftime('%l:%M:%S %p')
+            td= event[:event_type]
