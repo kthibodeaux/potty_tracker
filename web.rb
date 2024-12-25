@@ -8,6 +8,10 @@ DB = Sequel.connect ENV['DATABASE_URL']
 
 set :bind, '0.0.0.0'
 
+get '/' do
+  slim :index
+end
+
 get '/events' do
   content_type :json
   events = DB[:events].all

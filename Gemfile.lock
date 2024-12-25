@@ -30,6 +30,10 @@ GEM
       rack-protection (= 4.1.1)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    temple (0.10.3)
     tilt (2.5.0)
 
 PLATFORMS
@@ -43,6 +47,7 @@ DEPENDENCIES
   rackup
   sequel
   sinatra
+  slim
 
 BUNDLED WITH
    2.5.11
