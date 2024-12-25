@@ -9,13 +9,17 @@ TIMEZONE = 'America/New_York'
 
 set :bind, '0.0.0.0'
 
+def get_utc_range(raw_date)
+  utc_date = raw_date.in_time_zone('UTC')
+  utc_date.beginning_of_day..utc_date.end_of_day
+end
+
 get '/' do
   raw_date = params[:date] ? Date.parse(params[:date]) : Date.today
-  @date = raw_date.in_time_zone(TIMEZONE)
+  range = get_utc_range(raw_date)
 
-  utc_start = @date.beginning_of_day.getlocal('+00:00')
-  utc_end = @date.end_of_day.getlocal('+00:00')
+  @local_date = raw_date.in_time_zone(TIMEZONE)
+  @events = DB[:events].order(:timestamp).where(timestamp: range).all
 
-  @events = DB[:events].order(:timestamp).where(timestamp: utc_start..utc_end).all
   slim :index
 end
