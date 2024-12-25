@@ -2,9 +2,11 @@
 
 source 'https://rubygems.org'
 
+gem 'activesupport'
 gem 'mqtt'
 gem 'pg'
 gem 'puma'
 gem 'rackup'
 gem 'sequel'
 gem 'sinatra'
+gem 'slim'
