@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'activesupport'
+gem 'csv'
 gem 'mqtt'
 gem 'pg'
 gem 'puma'

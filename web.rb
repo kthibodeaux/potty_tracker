@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/time'
+require 'csv'
 require 'sinatra'
 require 'sequel'
 
@@ -22,4 +23,16 @@ get '/' do
   @events = DB[:events].order(:timestamp).where(timestamp: range).all
 
   slim :index
+end
+
+get '/all' do
+  content_type 'text/csv'
+  attachment 'events.csv'
+
+  CSV.generate do |csv|
+    csv << DB[:events].columns
+    DB[:events].each do |event|
+      csv << event.values
+    end
+  end
 end
